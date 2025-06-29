@@ -55,11 +55,25 @@ public class MoveIngredientParameterizedTest {
         // Вызываем метод moveIngredient, изменяем индекс элемента
         burger.moveIngredient(index, newIndex);
 
-        // Проверяем, что размер списка остался без изменений
-        assertEquals(originalSize, burger.ingredients.size());
-
         // Проверяем, что индекс элемента изменен
         assertEquals(ingredientToMove, burger.ingredients.get(newIndex));
+    }
+
+    // Тестирование метода moveIngredient в классе Burger
+    // Размер списка остался без изменений
+    @Test
+    public void theListSizeRemainsUnchanged() {
+        List<Ingredient> originalIngredients = new ArrayList<>(burger.ingredients);
+        Ingredient ingredientToMove = originalIngredients.get(index);
+
+        // Размер списка до перемещения ингредиентов
+        int originalSize = originalIngredients.size();
+
+        // Вызываем метод moveIngredient, изменяем индекс элемента
+        burger.moveIngredient(index, newIndex);
+
+        // Проверяем, что размер списка остался без изменений
+        assertEquals(originalSize, burger.ingredients.size());
     }
 
 }

@@ -1,5 +1,6 @@
 package praktikum.test;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -146,9 +147,21 @@ public class BurgerTest {
 
         String receipt = burger.getReceipt();
 
-        assertTrue(receipt.contains("= sauce sour cream ="));
-        assertTrue(receipt.contains("= filling dinosaur ="));
-        assertTrue(receipt.contains("= filling cutlet ="));
+        SoftAssertions softly = new SoftAssertions();
+
+        softly.assertThat(receipt)
+                .as("Проверка наличия соуса в чеке")
+                .contains("= sauce sour cream =");
+
+        softly.assertThat(receipt)
+                .as("Проверка наличия первой начинки в чеке")
+                .contains("= filling dinosaur =");
+
+        softly.assertThat(receipt)
+                .as("Проверка наличия второй начинки в чеке")
+                .contains("= filling cutlet =");
+
+        softly.assertAll();
     }
 
     // Тестирование метода getReceipt в классе Burger
